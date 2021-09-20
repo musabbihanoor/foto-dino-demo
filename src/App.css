@@ -1,38 +1,104 @@
-.App {
+.App div {
+  display: flex;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.city-form {
+  width: 300px;
+  position: fixed;
+}
+
+.cityItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ced4da;
+}
+
+.cityItem img {
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+/* 
+.cityItem div {
+  display: flex;
+  flex-direction: ;
+} */
+
+.cityItem h1 {
+  font-size: 20px;
+}
+
+.cityItem h2 {
+  font-size: 17px;
+}
+
+.cityItem h3 {
+  font-size: 17px;
+}
+
+.cityItem button {
+}
+
+.cities {
+  width: 50%;
+  margin-left: 400px;
+}
+
+.city {
+  width: 30%;
+  border: 1px solid #ced4da;
+  border-radius: 20px;
+  margin: 20px;
+  padding: 50px 10px;
+}
+
+.city .btn-secondary {
+  width: 40px;
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.city h1 {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.city h2 {
+  color: grey;
+  text-align: center;
+  font-size: 17px;
+  font-style: italic;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.city h3 {
+  font-size: 20px;
+  text-align: center;
+  font-weight: 500;
+  color: #0d6efd;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.location-item {
+  border-bottom: 1px solid #ced4da;
+  margin: 10px;
+  padding: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.location-item h4 {
+  font-size: 20px;
+}
+.location-item h5,
+.location-item h6 {
+  font-size: 14px;
+  color: #323233;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.location-item button {
+  height: 35px;
+}
+
+.location-form {
+  width: 100%;
+  position: absolute;
 }
