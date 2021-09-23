@@ -32,17 +32,21 @@ const Cities = ({
         )}
       </div>
 
-      {cities.map((city) => (
-        <CityItem
-          key={city.id}
-          city={city}
-          deleteCity={deleteCity}
-          setUpdatingCity={setUpdatingCity}
-          fetchLocations={fetchLocations}
-          setCity={setCity}
-          setAddCity={setAddCity}
-        />
-      ))}
+      {searchCity.searching && searchCity.cities.length === 0 ? (
+        <p className='text-center'>Not record found</p>
+      ) : (
+        cities.map((city) => (
+          <CityItem
+            key={city.id}
+            city={city}
+            deleteCity={deleteCity}
+            setUpdatingCity={setUpdatingCity}
+            fetchLocations={fetchLocations}
+            setCity={setCity}
+            setAddCity={setAddCity}
+          />
+        ))
+      )}
     </div>
   );
 };

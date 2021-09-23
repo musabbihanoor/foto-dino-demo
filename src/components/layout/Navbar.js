@@ -41,7 +41,10 @@ const Navbar = ({
   };
 
   return (
-    <nav className='navbar navbar-expand-lg navbar-light bg-light'>
+    <nav
+      className='navbar navbar-expand-lg navbar-light bg-light fixed-top'
+      style={{ zIndex: "100" }}
+    >
       <div className='container-fluid'>
         <h1 className='navbar-brand'>Foto Dino</h1>
         <button
@@ -59,13 +62,20 @@ const Navbar = ({
           className='collapse navbar-collapse justify-content-end'
           id='navbarSupportedContent'
         >
-          <button
-            className='btn btn-warning mx-3'
-            aria-current='page'
-            onClick={() => setAddCity(true)}
-          >
-            <i className='fa fa-plus'></i> Add City
-          </button>
+          <form className='d-flex mx-5' onSubmit={onSubmit}>
+            <input
+              className='form-control me-2'
+              type='search'
+              placeholder='Search a city'
+              aria-label='Search'
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              style={{ width: "300px" }}
+            />
+            <button className='btn btn-success' type='submit'>
+              Search
+            </button>
+          </form>
           <div className='mx-5'>
             <p className='my-auto mx-2'>Sort by: </p>
             <ul className='navbar-nav'>
@@ -89,19 +99,13 @@ const Navbar = ({
             </ul>
           </div>
 
-          <form className='d-flex' onSubmit={onSubmit}>
-            <input
-              className='form-control me-2'
-              type='search'
-              placeholder='Search a city'
-              aria-label='Search'
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
-            <button className='btn btn-success' type='submit'>
-              Search
-            </button>
-          </form>
+          <button
+            className='btn btn-warning mx-3'
+            aria-current='page'
+            onClick={() => setAddCity(true)}
+          >
+            <i className='fa fa-plus'></i> Add City
+          </button>
         </div>
       </div>
     </nav>

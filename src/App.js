@@ -48,15 +48,17 @@ const App = () => {
         "Content-Type": "application/json",
       },
     };
-    await axios.post("cities/", formData, config).then((res) => {
-      const data = res.data;
+    await axios
+      .post("https://api.photodino.com/locations/cities/", formData, config)
+      .then((res) => {
+        const data = res.data;
 
-      if (sortType === "id2") {
-        setCities([data, ...cities]);
-      } else {
-        setCities([...cities, data]);
-      }
-    });
+        if (sortType === "id2") {
+          setCities([data, ...cities]);
+        } else {
+          setCities([...cities, data]);
+        }
+      });
   };
 
   const updateCity = async (data, id) => {
@@ -65,18 +67,22 @@ const App = () => {
         "Content-Type": "application/json",
       },
     };
-    await axios.put(`cities/${id}/`, data, config).then((res) => {
-      const data = res.data;
-      setCities(
-        cities.map((city) =>
-          city.id === id ? { ...city, name: data.name, code: data.code } : city
-        )
-      );
-    });
+    await axios
+      .put(`https://api.photodino.com/locations/cities/${id}/`, data, config)
+      .then((res) => {
+        const data = res.data;
+        setCities(
+          cities.map((city) =>
+            city.id === id
+              ? { ...city, name: data.name, code: data.code }
+              : city
+          )
+        );
+      });
   };
 
   const deleteCity = async (id) => {
-    await axios.delete(`cities/${id}/`);
+    await axios.delete(`https://api.photodino.com/locations/cities/${id}/`);
     setCities(cities.filter((city) => city.id !== id));
   };
 
@@ -84,7 +90,9 @@ const App = () => {
 
   const fetchLocations = async (cityId) => {
     await axios
-      .get("locations/", { params: { city_id: cityId } })
+      .get("https://api.photodino.com/locations/locations/", {
+        params: { city_id: cityId },
+      })
       .then((res) => {
         const data = res.data;
         setLocations(data);
@@ -99,10 +107,12 @@ const App = () => {
         "Content-Type": "application/json",
       },
     };
-    await axios.post("locations/", formData, config).then((res) => {
-      const data = res.data;
-      setLocations([...locations, data]);
-    });
+    await axios
+      .post("https://api.photodino.com/locations/locations/", formData, config)
+      .then((res) => {
+        const data = res.data;
+        setLocations([data, ...locations]);
+      });
   };
 
   const updatingLocation = async (data, id) => {
@@ -114,16 +124,18 @@ const App = () => {
       },
     };
 
-    await axios.put(`locations/${id}/`, data, config).then((res) => {
-      const data = res.data;
-      setLocations(
-        locations.map((location) => (location.id === id ? data : location))
-      );
-    });
+    await axios
+      .put(`https://api.photodino.com/locations/locations/${id}/`, data, config)
+      .then((res) => {
+        const data = res.data;
+        setLocations(
+          locations.map((location) => (location.id === id ? data : location))
+        );
+      });
   };
 
   const deleteLocation = async (id) => {
-    await axios.delete(`locations/${id}/`);
+    await axios.delete(`https://api.photodino.com/locations/locations/${id}/`);
     setLocations(locations.filter((location) => location.id !== id));
   };
 
@@ -171,7 +183,8 @@ const App = () => {
             ></img>
           ) : (
             !addLocation &&
-            !updateLocation.id && (
+            !updateLocation.id &&
+            !addCity && (
               <Cities
                 cities={searchCity.searching ? searchCity.cities : cities}
                 deleteCity={deleteCity}

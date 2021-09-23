@@ -1,3 +1,7 @@
+body {
+  padding-top: 30px;
+}
+
 .App div {
   display: flex;
   font-family: Arial, Helvetica, sans-serif;

@@ -43,7 +43,7 @@ const CityItem = ({
                 setCity(city);
               }}
             >
-              See more
+              Locations
             </button>
           </div>
         </div>

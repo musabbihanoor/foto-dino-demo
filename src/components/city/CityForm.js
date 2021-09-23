@@ -33,6 +33,7 @@ const CityForm = ({
       createCity({ code, name });
     }
 
+    setAddCity(false);
     setUpdatingCity({});
     setCode(0);
     setName("");
