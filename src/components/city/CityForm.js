@@ -5,6 +5,7 @@ const CityForm = ({
   updatingCity,
   setUpdatingCity,
   updateCity,
+  setAddCity,
 }) => {
   const [code, setCode] = useState(0);
   const [name, setName] = useState("");
@@ -42,8 +43,20 @@ const CityForm = ({
   };
 
   return (
-    <form className='city-form m-5' onSubmit={onSubmit}>
-      <h2>City Form</h2>
+    <form className='city-form mx-auto my-5' onSubmit={onSubmit}>
+      <div className='d-flex flex-row justify-content-between'>
+        <h2>City Form</h2>
+        <button
+          className='btn btn-danger'
+          onClick={() => {
+            setAddCity(false);
+            setUpdatingCity({});
+          }}
+        >
+          <i className='fa fa-times'></i>
+        </button>
+      </div>
+
       <div className='mb-3 d-flex flex-column'>
         <label htmlFor='code' className='form-label'>
           Code

@@ -1,17 +1,47 @@
 import React, { useState } from "react";
 
-const Navbar = ({ setSortType, setSearchCity, searchCity, cities }) => {
+const Navbar = ({
+  setSortType,
+  setSearchCity,
+  searchCity,
+  cities,
+  setAddCity,
+  setCities,
+}) => {
   const [searchText, setSearchText] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
     var re = new RegExp(searchText.toLowerCase(), "g");
     const searched = cities.filter((city) => city.name.toLowerCase().match(re));
-    setSearchCity({ ...searchCity, cities: searched, text: searchText });
+    setSearchCity({
+      ...searchCity,
+      cities: searched,
+      text: searchText,
+      searching: true,
+    });
+    setSearchText("");
+  };
+
+  const sortArray = (sortType) => {
+    if (sortType === "name") {
+      setCities((cities) => [
+        ...cities.sort((a, b) => (a.name > b.name ? 1 : -1)),
+      ]);
+      return;
+    }
+    if (sortType === "id") {
+      setCities((cities) => [...cities.sort((a, b) => a.id - b.id)]);
+      return;
+    }
+    if (sortType === "id2") {
+      setCities((cities) => [...cities.sort((a, b) => b.id - a.id)]);
+      return;
+    }
   };
 
   return (
-    <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
+    <nav className='navbar navbar-expand-lg navbar-light bg-light'>
       <div className='container-fluid'>
         <h1 className='navbar-brand'>Foto Dino</h1>
         <button
@@ -25,27 +55,50 @@ const Navbar = ({ setSortType, setSearchCity, searchCity, cities }) => {
         >
           <span className='navbar-toggler-icon'></span>
         </button>
-        <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-          <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
-            <select onChange={(e) => setSortType(e.target.value)}>
-              <option className='dropdown-item' value='id'>
-                Id
-              </option>
-              <option className='dropdown-item' value='name'>
-                Name
-              </option>
-            </select>
-          </ul>
+        <div
+          className='collapse navbar-collapse justify-content-end'
+          id='navbarSupportedContent'
+        >
+          <button
+            className='btn btn-warning mx-3'
+            aria-current='page'
+            onClick={() => setAddCity(true)}
+          >
+            <i className='fa fa-plus'></i> Add City
+          </button>
+          <div className='mx-5'>
+            <p className='my-auto mx-2'>Sort by: </p>
+            <ul className='navbar-nav'>
+              <select
+                onChange={(e) => {
+                  sortArray(e.target.value);
+                  setSortType(e.target.value);
+                }}
+                className='form-select'
+              >
+                <option className='dropdown-item' value='id'>
+                  Last Added
+                </option>
+                <option className='dropdown-item' value='name'>
+                  Name
+                </option>
+                <option className='dropdown-item' value='id2'>
+                  Newly Added
+                </option>
+              </select>
+            </ul>
+          </div>
+
           <form className='d-flex' onSubmit={onSubmit}>
             <input
               className='form-control me-2'
               type='search'
-              placeholder='Search'
+              placeholder='Search a city'
               aria-label='Search'
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
             />
-            <button className='btn btn-outline-success' type='submit'>
+            <button className='btn btn-success' type='submit'>
               Search
             </button>
           </form>

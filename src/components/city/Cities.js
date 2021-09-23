@@ -1,34 +1,37 @@
-import React, { useEffect } from "react";
+import React from "react";
 import CityItem from "./CityItem";
 
 const Cities = ({
   cities,
-  setCities,
-  sortType,
   deleteCity,
   setUpdatingCity,
   fetchLocations,
   setCity,
+  setAddCity,
+  setSearchCity,
+  searchCity,
 }) => {
-  useEffect(() => {
-    const sortArray = () => {
-      if (sortType === "id") {
-        const sorted = cities.sort((a, b) => (a.name > b.name ? 1 : -1));
-        setCities(sorted);
-        return;
-      }
-      if (sortType === "name") {
-        const sorted = cities.sort((a, b) => a.id - b.id);
-        setCities(sorted);
-        return;
-      }
-    };
-
-    sortArray();
-  }, [cities, setCities, sortType]);
-
   return (
-    <div className='cities d-flex flex-column'>
+    <div className='cities d-flex flex-column py-5 m-5'>
+      <div className='d-flex flex-row justify-content-between px-5'>
+        <h1>Cities</h1>
+        {searchCity.searching && (
+          <button className='btn btn-danger' style={{ height: "40px" }}>
+            <i
+              className='fa fa-times'
+              onClick={() => {
+                setSearchCity({
+                  ...searchCity,
+                  searching: false,
+                  text: "",
+                  cities: [],
+                });
+              }}
+            ></i>
+          </button>
+        )}
+      </div>
+
       {cities.map((city) => (
         <CityItem
           key={city.id}
@@ -37,6 +40,7 @@ const Cities = ({
           setUpdatingCity={setUpdatingCity}
           fetchLocations={fetchLocations}
           setCity={setCity}
+          setAddCity={setAddCity}
         />
       ))}
     </div>

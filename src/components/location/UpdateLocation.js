@@ -50,7 +50,7 @@ const UpdateLocation = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setUpdateLocation(false);
+    setUpdateLocation({});
     updatingLocation(formData, updateLocation.id);
   };
 
@@ -59,7 +59,7 @@ const UpdateLocation = ({
       <div className='d-flex justify-content-between'>
         <h2>Update Location</h2>
         <button
-          className='btn btn-secondary'
+          className='btn btn-danger'
           onClick={() => setUpdateLocation(false)}
         >
           <i className='fa fa-times'></i>

@@ -7,9 +7,10 @@ const CityItem = ({
   setUpdatingCity,
   fetchLocations,
   setCity,
+  setAddCity,
 }) => {
   return (
-    <div className='cityItem m-2 p-3'>
+    <div className='cityItem mx-auto p-3'>
       <img
         alt='location'
         src='https://images-platform.99static.com//6lGOzEAYLsS0U1etk92iqtXunGw=/1145x1239:1844x1938/fit-in/500x500/99designs-contests-attachments/110/110086/attachment_110086393'
@@ -22,7 +23,10 @@ const CityItem = ({
           <div>
             <button
               className='btn btn-outline-success ml-1'
-              onClick={() => setUpdatingCity(city)}
+              onClick={() => {
+                setUpdatingCity(city);
+                setAddCity(true);
+              }}
             >
               <i className='fa fa-edit'></i>
             </button>
@@ -43,10 +47,6 @@ const CityItem = ({
             </button>
           </div>
         </div>
-        {/* 
-        <button className='btn btn-warning'>
-          Locations
-        </button> */}
       </div>
     </div>
   );

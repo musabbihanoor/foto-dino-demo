@@ -31,6 +31,7 @@ const LocationForm = ({ createLocation, setAddLocation }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     createLocation(formData);
+    setAddLocation(false);
   };
 
   return (
@@ -38,7 +39,7 @@ const LocationForm = ({ createLocation, setAddLocation }) => {
       <div className='d-flex justify-content-between'>
         <h2>Location Form</h2>
         <button
-          className='btn btn-secondary'
+          className='btn btn-danger'
           onClick={() => setAddLocation(false)}
         >
           <i className='fa fa-times'></i>

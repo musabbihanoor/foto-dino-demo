@@ -11,12 +11,14 @@ import UpdateLocation from "./components/location/UpdateLocation";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
-  const [cities, setCities] = useState([]);
+  const [cities, setCities] = useState([{}]);
   const [city, setCity] = useState({});
   const [searchCity, setSearchCity] = useState({
     text: "",
     cities: [],
+    searching: false,
   });
+  const [addCity, setAddCity] = useState(false);
   const [sortType, setSortType] = useState("id");
   const [updatingCity, setUpdatingCity] = useState({});
   const [updateLocation, setUpdateLocation] = useState({});
@@ -48,7 +50,12 @@ const App = () => {
     };
     await axios.post("cities/", formData, config).then((res) => {
       const data = res.data;
-      setCities([...cities, data]);
+
+      if (sortType === "id2") {
+        setCities([data, ...cities]);
+      } else {
+        setCities([...cities, data]);
+      }
     });
   };
 
@@ -128,32 +135,34 @@ const App = () => {
           searchCity={searchCity}
           setSearchCity={setSearchCity}
           cities={cities}
+          setAddCity={setAddCity}
+          setCities={setCities}
         />
-        <div>
-          <div className='d-flex flex-column'>
-            {!addLocation && !updateLocation.id && (
-              <CityForm
-                createCity={createCity}
-                updatingCity={updatingCity}
-                setUpdatingCity={setUpdatingCity}
-                updateCity={updateCity}
-              />
-            )}
-            {addLocation && (
-              <LocationForm
-                createLocation={createLocation}
-                setAddLocation={setAddLocation}
-              />
-            )}
-            {updateLocation.id && (
-              <UpdateLocation
-                updateLocation={updateLocation}
-                updatingLocation={updatingLocation}
-                setUpdateLocation={setUpdateLocation}
-              />
-            )}
-          </div>
-
+        {addCity && (
+          <CityForm
+            createCity={createCity}
+            updatingCity={updatingCity}
+            setUpdatingCity={setUpdatingCity}
+            updateCity={updateCity}
+            setAddCity={setAddCity}
+          />
+        )}
+        <div className='d-flex flex-column'>
+          {addLocation && (
+            <LocationForm
+              createLocation={createLocation}
+              setAddLocation={setAddLocation}
+            />
+          )}
+          {updateLocation.id && (
+            <UpdateLocation
+              updateLocation={updateLocation}
+              updatingLocation={updatingLocation}
+              setUpdateLocation={setUpdateLocation}
+            />
+          )}
+        </div>
+        <div className='justify-content-center'>
           {loading ? (
             <img
               className='mx-auto'
@@ -164,13 +173,14 @@ const App = () => {
             !addLocation &&
             !updateLocation.id && (
               <Cities
-                sortType={sortType}
-                cities={searchCity.text !== "" ? searchCity.cities : cities}
+                cities={searchCity.searching ? searchCity.cities : cities}
                 deleteCity={deleteCity}
                 setUpdatingCity={setUpdatingCity}
-                setCities={setCities}
                 fetchLocations={fetchLocations}
                 setCity={setCity}
+                setAddCity={setAddCity}
+                searchCity={searchCity}
+                setSearchCity={setSearchCity}
               />
             )
           )}
