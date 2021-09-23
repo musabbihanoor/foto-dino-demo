@@ -30,6 +30,44 @@ const LocationForm = ({ createLocation, setAddLocation }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    if (!name) {
+      alert("Please add a name");
+      return;
+    }
+    if (!rent) {
+      alert("Please add a rent");
+      return;
+    }
+    if (!email) {
+      alert("Please add a email");
+      return;
+    }
+    if (!phone) {
+      alert("Please add a phone");
+      return;
+    }
+    if (!coordinates) {
+      alert("Please add a coordinates");
+      return;
+    }
+    if (!street_number) {
+      alert("Please add a street number");
+      return;
+    }
+    if (!street_name) {
+      alert("Please add a street name");
+      return;
+    }
+    if (!postal_code) {
+      alert("Please add a postal code");
+      return;
+    }
+    if (!status) {
+      alert("Please add a status");
+      return;
+    }
+
     createLocation(formData);
     setAddLocation(false);
   };

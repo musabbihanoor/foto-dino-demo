@@ -37,7 +37,7 @@ const App = () => {
   //City methods
 
   const fetchCities = async () => {
-    const res = await axios.get("cities/");
+    const res = await axios.get("https://api.photodino.com/locations/cities/");
     const data = await res.data;
     return data;
   };

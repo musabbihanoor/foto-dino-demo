@@ -87,7 +87,7 @@ const Navbar = ({
                 className='form-select'
               >
                 <option className='dropdown-item' value='id'>
-                  Last Added
+                  Oldest
                 </option>
                 <option className='dropdown-item' value='name'>
                   Name
